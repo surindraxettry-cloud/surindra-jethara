@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f2f2f2;
+            margin:0;
+            padding:20px;
+        }
+
+        .container{
+            width:400px;
+            margin:auto;
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            color:#333;
+        }
+
+        label{
+            font-weight:bold;
+        }
+
+        input, textarea{
+            width:100%;
+            padding:8px;
+            margin-top:5px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            box-sizing:border-box;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"]{
+            width:auto;
+        }
+
+        .gender{
+            margin-bottom:15px;
+        }
+
+        input[type="submit"],
+        input[type="reset"]{
+            width:48%;
+            padding:10px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            color:white;
+            font-size:16px;
+        }
+
+        input[type="submit"]{
+            background:green;
+        }
+
+        input[type="submit"]:hover{
+            background:darkgreen;
+        }
+
+        input[type="reset"]{
+            background:red;
+        }
+
+        input[type="reset"]:hover{
+            background:darkred;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>Student Registration Form</h2>
+
+<form id="myForm">
+
+<label>Full Name:</label>
+<input type="text" id="name" placeholder="Enter your full name" required>
+
+<label>Email:</label>
+<input type="email" id="email" placeholder="example@gmail.com" required>
+
+<label>Password:</label>
+<input type="password" id="password" placeholder="Minimum 8 characters" required>
+
+<label>Phone Number:</label>
+<input type="tel" id="phone" placeholder="98XXXXXXXX" required>
+
+<label>Age:</label>
+<input type="number" id="age" min="18" max="60" required>
+
+<label>Gender:</label>
+
+<div class="gender">
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+<input type="radio" name="gender" value="Other"> Other
+</div>
+
+<label>Date of Birth:</label>
+<input type="date" id="dob" required>
+
+<label>GPA:</label>
+<input type="number" id="gpa" step="0.01" min="0" max="4" required>
+
+<label>Address:</label>
+<textarea id="address" rows="4" placeholder="Enter your address" required></textarea>
+
+<input type="checkbox" id="terms">
+<label for="terms">I agree to the Terms and Conditions</label>
+
+<br><br>
+
+<input type="submit" value="Register">
+<input type="reset" value="Reset">
+
+</form>
+
+</div>
+
+<script>
+
+document.getElementById("myForm").addEventListener("submit", function(event){
+
+    let name = document.getElementById("name").value.trim();
+    let password = document.getElementById("password").value;
+    let phone = document.getElementById("phone").value;
+    let age = document.getElementById("age").value;
+    let gpa = document.getElementById("gpa").value;
+    let terms = document.getElementById("terms").checked;
+
+    let namePattern = /^[A-Za-z ]+$/;
+    let phonePattern = /^[0-9]{10}$/;
+
+    if(!namePattern.test(name)){
+        alert("Name should contain only letters.");
+        event.preventDefault();
+        return;
+    }
+
+    if(password.length < 8){
+        alert("Password must be at least 8 characters.");
+        event.preventDefault();
+        return;
+    }
+
+    if(!phonePattern.test(phone)){
+        alert("Phone number must contain exactly 10 digits.");
+        event.preventDefault();
+        return;
+    }
+
+    if(age < 18 || age > 60){
+        alert("Age must be between 18 and 60.");
+        event.preventDefault();
+        return;
+    }
+
+    if(gpa < 0 || gpa > 4){
+        alert("GPA must be between 0 and 4.");
+        event.preventDefault();
+        return;
+    }
+
+    if(!terms){
+        alert("Please accept the Terms and Conditions.");
+        event.preventDefault();
+        return;
+    }
+
+    alert("Registration Successful!");
+
+});
+
+</script>
+
+</body>
+</html>

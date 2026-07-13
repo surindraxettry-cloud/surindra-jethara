@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Voting Card System - Nepal</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+.container{
+    width:400px;
+    margin:40px auto;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+
+h1{
+    text-align:center;
+    color:#d60000;
+    margin-bottom:20px;
+}
+
+label{
+    font-weight:bold;
+}
+
+input[type=text],
+input[type=number]{
+    width:100%;
+    padding:10px;
+    margin:8px 0 15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+select{
+    width:100%;
+    padding:10px;
+    margin:8px 0 15px;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.result{
+    margin-top:20px;
+    background:#f8f8f8;
+    padding:15px;
+    border-radius:8px;
+}
+
+.result h2{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+#message{
+    color:green;
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🇳🇵 Nepal Online Voting</h1>
+
+<label>Full Name</label>
+<input type="text" id="name" placeholder="Enter Full Name">
+
+<label>Citizenship Number</label>
+<input type="number" id="citizen" placeholder="Enter Citizenship Number">
+
+<label>Country</label>
+<input type="text" value="Nepal" readonly>
+
+<label>Select Candidate</label>
+
+<select id="candidate">
+<option value="">Choose Candidate</option>
+<option value="Ram Sharma">Ram Sharma</option>
+<option value="Sita Karki">Sita Karki</option>
+<option value="Hari Thapa">Hari Thapa</option>
+</select>
+
+<button onclick="vote()">Submit Vote</button>
+
+<p id="message"></p>
+
+<div class="result">
+
+<h2>Voting Result</h2>
+
+<p>Ram Sharma : <span id="ram">0</span></p>
+<p>Sita Karki : <span id="sita">0</span></p>
+<p>Hari Thapa : <span id="hari">0</span></p>
+
+</div>
+
+</div>
+
+<script>
+
+let ram=0;
+let sita=0;
+let hari=0;
+
+function vote(){
+
+let name=document.getElementById("name").value;
+let citizen=document.getElementById("citizen").value;
+let candidate=document.getElementById("candidate").value;
+
+if(name==""){
+alert("Enter your name");
+return;
+}
+
+if(citizen==""){
+alert("Enter Citizenship Number");
+return;
+}
+
+if(candidate==""){
+alert("Select Candidate");
+return;
+}
+
+if(localStorage.getItem(citizen)){
+alert("This Citizenship Number has already voted.");
+return;
+}
+
+if(candidate=="Ram Sharma"){
+ram++;
+}
+
+if(candidate=="Sita Karki"){
+sita++;
+}
+
+if(candidate=="Hari Thapa"){
+hari++;
+}
+
+document.getElementById("ram").innerHTML=ram;
+document.getElementById("sita").innerHTML=sita;
+document.getElementById("hari").innerHTML=hari;
+
+localStorage.setItem(citizen,"Voted");
+
+document.getElementById("message").innerHTML="Thank you! Your vote has been submitted successfully.";
+
+document.getElementById("name").value="";
+document.getElementById("citizen").value="";
+document.getElementById("candidate").value="";
+
+}
+
+</script>
+
+</body>
+</html>
